@@ -54,15 +54,15 @@ Localizations is currently not supported but it could be added through the Reque
 
 #### *.Abstractions projects & namespaces
 
-Abstractions projects are used to create a real separation of concerns (SoC). This allows the dependent projects to be completely unaware of the implementation of it's dependencies, meaning a future implementation of Demo.Movies.Abstractions can choose to use ElasticSearch without ever having to modify or even consider the dependant projects. The abstractions namespace is a lite version of the abstractions projects intended to be used as an internal alternative, it enabled a quick future migration to using abstractions projects whenever the specifications change with the added benefit of enforcing a consistent project structure.
+Abstractions projects are used to create a real separation of concerns (SoC). This allows the dependent projects to be completely unaware of the implementation of it's dependencies, meaning a future implementation of Demo.Movies.Abstractions can choose to use ElasticSearch without ever having to modify or even consider the dependant projects. The abstractions namespace is a lite-version of the abstractions projects, specifically intended to be used as a simpler alternative for internal code. The namespace method simplifies future migrations towards the project approach with the added benefit of enforcing a consistent project structure.
 
 #### *.(Implementation) projects
 
-Implementation projects are used to define internals and are intended to only be used indirectly.
+Implementation projects are used to define internals and are intended to only ever be used indirectly.
 
 #### Demo.Caches
 
-The cache project is caching data through decorators. The reason decorators are used is to have the caching only be dependent on the public interface and have no knowledge of the underlying implmentation, aka SoC. While the cache could theoretically be used directly in each implementation project, as is often done, this quickly leads to code that is very hard to reason about which ultimately increases development costs. A possible improvement to the caching project would likely be to split it into three or more projects for this solution, see example below.
+The cache project is caching data through decorators. The purpose of using decorators is to enforce that the caching only is dependent on the public interface and have no knowledge of the underlying implmentation, aka SoC. While the cache could theoretically be used directly in each implementation project, as is often done, this quickly leads to code that is very hard to reason about which ultimately increases development costs. A possible improvement to the caching project would likely be to split it into three or more projects for this solution, see example below.
 
 Example projects
 * Demo.Caching.Abstractions - (ICacheManager)
@@ -87,4 +87,4 @@ These UnitTests verify both the compliance to Demo.Movies.Abstractions as well a
 
 ### Demo.WebApi.Tests
 
-These UnitTests verify that the controllers work as intended. It is also reasonable to add E2E tests here.
+These UnitTests verify that the controllers work as intended. It would also be reasonable to add E2E tests here.
